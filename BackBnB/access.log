@@ -1,0 +1,23 @@
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 307-195-496
+127.0.0.1 - - [13/Oct/2018 13:54:45] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:54:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+ * Detected change in '/Users/sushantrao/Documents/HackUMass2018/rateBnB/BackBnB/run.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 307-195-496
+127.0.0.1 - - [13/Oct/2018 13:55:10] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:11] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:30] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:31] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:32] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:32] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:33] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:33] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:33] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:34] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:34] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:35] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [13/Oct/2018 13:55:37] "[33mGET / HTTP/1.1[0m" 404 -
