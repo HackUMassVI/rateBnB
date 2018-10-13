@@ -12,12 +12,14 @@ def home():
 	return "Welcome"
 
 
-def getCrimeIndex(lat,lon):
+def get_crime_index(lat,lon):
 	url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
 	headers = {"X-Mashape-Key": "qWMc2K59dgmshJH33sKjN5KILREOp1QQXj2jsniuCdIgcwNvTi", "Accept": "application/json"}
 	response = requests.get(url, headers = headers)
 	crime_dict = json.loads(response.text)
 	return crime_dict["score"]
+
+def 
 
 if __name__ == '__main__':
     app.run(debug=True)
