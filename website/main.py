@@ -14,7 +14,7 @@ def home():
         form = request.form
         url = form.get('URL')
         url = url[8:]
-        returnedVal = "http://127.0.0.1:4000/get_rating?url=" + url
+        returnedVal = "http://127.0.0.1:80/get_rating?url=" + url
         r = requests.get(returnedVal)
         return scoreList(r.text)
 
@@ -25,3 +25,7 @@ def scoreList(returnedVal):
 @app.route('/about')
 def about():
     return render_template('about.mako')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

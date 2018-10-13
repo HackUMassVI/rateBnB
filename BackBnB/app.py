@@ -36,14 +36,18 @@ def get_crime_index(lat,lon):
 	crime_dict = json.loads(response.text)
 	return crime_dict['score']
 
+@app.route('/', methods=['GET'])
+def home():
+	return "Hello, welcome to the backend of rateBnB"
+
 @app.route('/get_rating', methods=['GET'])
 def get_index():
 	url = str(request.values['url'])
 	url = "https://"+url
 	page = get_page(url)
-	return page
 	lat,lon = get_coords(page)
 	crime_index = get_crime_index(lat,lon)
+	return crime_index
 
 
 
