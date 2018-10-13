@@ -13,8 +13,9 @@ def home():
     else:
         form = request.form
         url = form.get('URL')
-        url = url[8:]
-        returnedVal = "http://127.0.0.1:80/get_rating?url=" + url
+        temp = url.index("?")
+        url = url[8:temp]
+        returnedVal = "http://67.205.146.104:80/get_rating?url=" + url
         r = requests.get(returnedVal)
         return scoreList(r.text)
 
