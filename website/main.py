@@ -1,12 +1,26 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_mako import MakoTemplates, render_template
+import requests
+
 
 app = Flask(__name__)
 mako = MakoTemplates(app)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return render_template('index.mako')
+    if request.method == 'GET':
+        return render_template('index.mako')
+    else:
+        form = request.form
+        url = form.get('URL')
+        url = url[8:]
+        returnedVal = "http://127.0.0.1:4000/get_rating?url=" + url
+        r = requests.get(returnedVal)
+        return scoreList(r.text)
+
+@app.route('/scoreList', methods=['GET', 'POST'])
+def scoreList(returnedVal):
+        return render_template('scoredListing.mako', response=returnedVal)
 
 @app.route('/about')
 def about():

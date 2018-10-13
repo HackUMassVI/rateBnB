@@ -41,13 +41,11 @@ def get_index():
 	url = str(request.values['url'])
 	url = "https://"+url
 	page = get_page(url)
+	return page
 	lat,lon = get_coords(page)
 	crime_index = get_crime_index(lat,lon)
-	return crime_index
+
 
 
 if __name__ == '__main__':
-	app.run(debug=True)
-
-
-
+	app.run(debug=True, host='0.0.0.0', port=80)
