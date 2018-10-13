@@ -6,6 +6,8 @@ import urllib.request as urllib2
 from bs4 import BeautifulSoup
 import html2text
 from ast import literal_eval
+import requests
+import json
 
 app = Flask(__name__)
 
@@ -27,9 +29,12 @@ def get_coords(page):
     coord_dict = literal_eval(literal_eval("{"+coord_str+"}"))
     return str(coord_str['listing_lat']), str(coord_str['listing_lng'])
 
-@app.route('/', methods=['GET'])
-def home():
-    return "Welcome"
+def get_crime_index(lat,lon):
+	url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
+	headers = {"X-Mashape-Key": "qWMc2K59dgmshJH33sKjN5KILREOp1QQXj2jsniuCdIgcwNvTi", "Accept": "application/json"}
+	response = requests.get(url, headers = headers)
+	crime_dict = json.loads(response.text)
+	return crime_dict["score"]
 
 @app.route('/get_rating', methods=['GET'])
     # error handling
