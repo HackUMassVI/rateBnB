@@ -1,7 +1,7 @@
 #!flask/bin/python
 #examples
 
-from flask import Flask, jsonify, abort, make_response, request, url_for
+from flask import Flask, jsonify, abort, make_response, request, url_for, jsonify
 import urllib.request as urllib2
 from bs4 import BeautifulSoup
 import html2text
@@ -63,19 +63,19 @@ def get_review_count(page):
 	return short[first+l:short.index("\">")]
 
 def get_amenities(page):
-	amenities = ['Wifi', 'Kitchen', 'Free street parking', 'Air conditioning', 'Laptop friendly workspace', 'Cable TV'. 'Hangers']
+	amenities = ['Wifi', 'Kitchen', 'Free street parking', 'Air conditioning', 'Laptop friendly workspace', 'Cable TV', 'Hangers']
 	page = page.decode("utf-8")
 	available = []
-	for a in amenties:
+	for a in amenities:
 		if page.find(a) !=-1:
 			available.append(a)
 	return available
 
-def score(review_count, rating, amenities, safety):
+def get_score(review_count, rating, amenities, safety):
 	# 50% crime, 20% review_count 20% rating 10% amenties
-	review_c = 100 if review_count>=100 else review_count
-	score = float(safety)*0.5 + (float(len(amenities))/7.0)*0.1 + (float(rating)/5.0)*0.2 + float(review_c)*0.2
-	return score
+	review_c = 100 if int(review_count)>=100 else int(review_count)
+	score = float(safety)/100.0*0.5 + (float(len(amenities))/7.0)*0.1 + (float(rating)/5.0)*0.2 + (float(review_c)/100.0)*0.2
+	return str("{0:.2f}".format(score*100))+"%"
 
 def get_crime_index(lat,lon):
 	url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
@@ -88,14 +88,31 @@ def get_crime_index(lat,lon):
 def home():
 	return "Hello, welcome to the backend of rateBnB"
 
-@app.route('/get_rating', methods=['GET'])
+@app.route('/get_all_info', methods=['GET'])
 def get_index():
 	url = str(request.values['url'])
 	url = "https://"+url
 	page = get_page(url)
 	lat,lon = get_coords(page)
 	crime_index = get_crime_index(lat,lon)
-	return crime_index
+	listing_name = get_listing_name(page)
+	img_src = get_image(page)
+	rating = get_rating(page)
+	review_count = get_review_count(page)
+	amenities = get_amenities(page)
+	score = get_score(review_count, rating, amenities, crime_index)
+	output = [{
+				'listing_name':listing_name, 
+				'image':img_src,
+				'rating':rating,
+				'review_count':review_count,
+				'safety':crime_index,
+				'amenities':amenities,
+				'score':score
+	}]
+	return jsonify(output)
+
+
 
 
 if __name__ == '__main__':
