@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<style>
+/* CSS used here will be applied after bootstrap.css */
+
+body {
+ background: url('${image}') no-repeat center center fixed;
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
+ background-size: cover;
+}
+
+.panel-default {
+ opacity: 0.9;
+ margin-top:30px;
+}
+.form-group.last {
+ margin-bottom:0px;
+}
+</style>
 
 <html lang="en">
 
@@ -46,7 +65,37 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
-      <h1>${response}</h1>
+      <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h3 class="text-center">${listing_name}</h3>
+                      <p class="text-center"><a href="${url}">Listing URL</a></p>
+                        <div class="form-horizontal">
+                        <div class="form-group text-center" style="margin-left: 15%">
+                            <div class="col-sm-9">
+                                <h2> Total Score ${score} <h2>
+                            </div>
+                            <div class="col-sm-9">
+                                <h4> Safety Score ${safety} <h2>
+                            </div>
+                            <div class="col-sm-9">
+                                <h4> Num Reviews ${review_count} <h2>
+                            </div>
+                            <div class="col-sm-9">
+                                <h4> Amenitites Score ${amenities}<h2>
+                            </div>
+                            <div class="col-sm-9">
+                                <h4> Rating ${rating} <h2>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
 </div>
 
 </body>

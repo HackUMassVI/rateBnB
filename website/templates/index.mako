@@ -48,7 +48,6 @@ body {
   <script>
   $(function () {
     $( "#submitForm" ).click(function() {
-      console.log("click");
         $( "#formTing" ).submit();
     });
   });
