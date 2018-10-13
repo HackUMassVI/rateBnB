@@ -45,9 +45,10 @@ def get_index():
 	url = str(request.values['url'])
 	url = "https://"+url
 	page = get_page(url)
+	return page
 	lat,lon = get_coords(page)
 	crime_index = get_crime_index(lat,lon)
-	return crime_index
+
 
 
 
