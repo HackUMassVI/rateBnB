@@ -29,6 +29,54 @@ def get_coords(page):
 	coord_dict = json.loads(coord_str)
 	return str(coord_dict['listing_lat']), str(coord_dict['listing_lng'])
 
+def get_listing_name(page):
+	search_str = "<title>"
+	page = page.decode("utf-8")
+	index = page.index(search_str)
+	first = page[index+len(search_str):]
+	last = first.index("</title>")
+	listing_name = first[:int(last)]
+	return listing_name
+
+def get_image(page):
+	search_str = "rel=\"image_src\" href=\""
+	page = page.decode("utf-8")
+	index = page.index(search_str)
+	first = page[index+len(search_str):]
+	last = first.index("\">")
+	img_src = first[:int(last)]
+	return img_src
+
+def get_rating(page):
+	search_str = " out of 5"
+	page = page.decode("utf-8")
+	index = page.index(search_str)
+	return page[index-1]
+	
+def get_review_count(page):
+	search_str = "reviewCount"
+	page = page.decode("utf-8")
+	index = page.index(search_str)
+	short = page[index:]
+	first = short.index("content=")
+	l = len("content=\"")
+	return short[first+l:short.index("\">")]
+
+def get_amenities(page):
+	amenities = ['Wifi', 'Kitchen', 'Free street parking', 'Air conditioning', 'Laptop friendly workspace', 'Cable TV'. 'Hangers']
+	page = page.decode("utf-8")
+	available = []
+	for a in amenties:
+		if page.find(a) !=-1:
+			available.append(a)
+	return available
+
+def score(review_count, rating, amenities, safety):
+	# 50% crime, 20% review_count 20% rating 10% amenties
+	review_c = 100 if review_count>=100 else review_count
+	score = float(safety)*0.5 + (float(len(amenities))/7.0)*0.1 + (float(rating)/5.0)*0.2 + float(review_c)*0.2
+	return score
+
 def get_crime_index(lat,lon):
 	url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
 	headers = {"X-Mashape-Key": "qWMc2K59dgmshJH33sKjN5KILREOp1QQXj2jsniuCdIgcwNvTi", "Accept": "application/json"}
@@ -48,8 +96,6 @@ def get_index():
 	lat,lon = get_coords(page)
 	crime_index = get_crime_index(lat,lon)
 	return crime_index
-
-
 
 
 if __name__ == '__main__':
