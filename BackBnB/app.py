@@ -117,7 +117,7 @@ def get_index():
 	return jsonify(output)
 
 @app.route('/chrome_get', methods=['GET'])
-def get_score():
+def get_chrome():
 	url = str(request.values['url'])
 	url = "https://"+url
 	page = get_page(url)
