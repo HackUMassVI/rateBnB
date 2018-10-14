@@ -83,7 +83,7 @@ body {
               <div class="panel panel-default">
                   <div class="panel-body">
                     <h3 class="text-center">Welcome</h3>
-                    <p class="lead text-center">Enter a URL below to begin</p>
+                    <p class="lead text-center">Enter a URL below to get a score!</p>
                       <form class="form-horizontal" id = "formTing" role="form" action="/" method="post">
                       <div class="form-group text-center" style="margin-left: 15%">
                           <div class="col-sm-9">

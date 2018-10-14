@@ -1,5 +1,4 @@
 #!flask/bin/python
-#examples
 
 from flask import Flask, jsonify, abort, make_response, request, url_for, jsonify
 import urllib.request as urllib2
@@ -10,7 +9,6 @@ import requests
 import json
 
 app = Flask(__name__)
-
 
 def get_page(link):
 	try:
@@ -50,13 +48,19 @@ def get_image(page):
 def get_rating(page):
 	search_str = " out of 5"
 	page = page.decode("utf-8")
-	index = page.index(search_str)
+	try:
+		index = page.index(search_str)
+	except:
+		return 0
 	return page[index-1]
 	
 def get_review_count(page):
 	search_str = "reviewCount"
 	page = page.decode("utf-8")
-	index = page.index(search_str)
+	try:
+		index = page.index(search_str)
+	except:
+		return 0
 	short = page[index:]
 	first = short.index("content=")
 	l = len("content=\"")
@@ -74,7 +78,7 @@ def get_amenities(page):
 def get_score(review_count, rating, amenities, safety):
 	# 50% crime, 20% review_count 20% rating 10% amenties
 	review_c = 100 if int(review_count)>=100 else int(review_count)
-	score = float(safety)/100.0*0.5 + (float(len(amenities))/7.0)*0.1 + (float(rating)/5.0)*0.2 + (float(review_c)/100.0)*0.2
+	score = float(safety)/100.0*0.3 + (float(len(amenities))/7.0)*0.2 + (float(rating)/5.0)*0.3 + (float(review_c)/100.0)*0.2
 	return str("{0:.2f}".format(score*100))+"%"
 
 def get_crime_index(lat,lon):
@@ -110,6 +114,45 @@ def get_index():
 				'amenities':amenities,
 				'score':score
 	}]
+	return jsonify(output)
+
+@app.route('/chrome_get', methods=['GET'])
+def get_chrome():
+	url = str(request.values['url'])
+	url = "https://"+url
+	page = get_page(url)
+	lat,lon = get_coords(page)
+	crime_index = get_crime_index(lat,lon)
+	listing_name = get_listing_name(page)
+	img_src = get_image(page)
+	rating = get_rating(page)
+	review_count = get_review_count(page)
+	amenities = get_amenities(page)
+	score = get_score(review_count, rating, amenities, crime_index)
+	return score[:2]
+
+@app.route('/ios_get', methods=['GET'])
+def get_ios():
+	url = str(request.values['url'])
+	url = "https://"+url
+	page = get_page(url)
+	lat,lon = get_coords(page)
+	crime_index = get_crime_index(lat,lon)
+	listing_name = get_listing_name(page)
+	img_src = get_image(page)
+	rating = get_rating(page)
+	review_count = get_review_count(page)
+	amenities = get_amenities(page)
+	score = get_score(review_count, rating, amenities, crime_index)
+	output = {
+				'listing_name':listing_name, 
+				'image':img_src,
+				'rating':rating,
+				'review_count':review_count,
+				'safety':crime_index,
+				'amenities':amenities,
+				'score':score
+	}
 	return jsonify(output)
 
 
