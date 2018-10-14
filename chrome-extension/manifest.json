@@ -1,0 +1,18 @@
+{
+	"name": "rateBNB",
+	"version": "1.0",
+	"description": "We rate AirBNB listings by Crime, Reviews, Public Transport and rate them out of 5",
+	"manifest_version": 3,
+
+
+    "browser_action": {
+      "default_popup": "popup.html"
+    },
+ 
+  	
+    "permissions": 
+  	[
+    	"activeTab", "tabs"
+  	]
+
+}
