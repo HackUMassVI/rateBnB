@@ -11,7 +11,7 @@ body {
 }
 
 .panel-default {
- opacity: 0.9;
+ opacity: 0.95;
  margin-top:30px;
 }
 .form-group.last {
@@ -76,19 +76,40 @@ body {
                         <div class="form-horizontal">
                         <div class="form-group text-center" style="margin-left: 15%">
                             <div class="col-sm-9">
-                                <h2> Total Score ${score} <h2>
+                                <h2> Total Score<br>
+                                  % if int(score[:2])>80:
+                                  <font color="green">&ensp; ${score}</font> 
+                                  % elif int(score[:2])>70:
+                                  <font color="#9EFF00">&ensp; ${score}</font> 
+                                  % elif int(score[:2])>40:
+                                  <font color="#FFCD00">&ensp; ${score}</font> 
+                                  % else:
+                                  <font color="#red">&ensp; ${score}</font> 
+                                  % endif
+                                </h2>
+
                             </div>
                             <div class="col-sm-9">
-                                <h4> Safety Score ${safety} <h2>
+                            <div class="progress">
+                              <div class="progress-bar bg-succes" role="progressbar" style="width: ${score[:2]}%" aria-valuenow="${score[:2]}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                                
                             </div>
                             <div class="col-sm-9">
-                                <h4> Num Reviews ${review_count} <h2>
+                                <h4> Safety Score: ${safety} </h4>
                             </div>
                             <div class="col-sm-9">
-                                <h4> Amenitites Score ${amenities}<h2>
+                                <h4> Num Reviews: ${review_count} </h4>
                             </div>
                             <div class="col-sm-9">
-                                <h4> Rating ${rating} <h2>
+                                <h4> Amenitites: <br>
+                                % for amen in amenities:
+                                    ${amen}<br>
+                                % endfor
+                                </h4>
+                            </div>
+                            <div class="col-sm-9">
+                                <h4> Rating: ${rating} </h4>
                             </div>
                         </div>
                       </div>
