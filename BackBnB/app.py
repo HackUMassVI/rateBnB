@@ -48,7 +48,10 @@ def get_image(page):
 def get_rating(page):
 	search_str = " out of 5"
 	page = page.decode("utf-8")
-	index = page.index(search_str)
+	try:
+		index = page.index(search_str)
+	except:
+		return 0
 	return page[index-1]
 	
 def get_review_count(page):

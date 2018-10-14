@@ -77,9 +77,9 @@ body {
                         <div class="form-group text-center" style="margin-left: 15%">
                             <div class="col-sm-9">
                                 <h2> Total Score<br>
-                                  % if int(score[:2])>80:
+                                  % if int(score[:2])>=80:
                                   <font color="green">&ensp; ${score}</font> 
-                                  % elif int(score[:2])>70:
+                                  % elif int(score[:2])>=65:
                                   <font color="#9EFF00">&ensp; ${score}</font> 
                                   % elif int(score[:2])>40:
                                   <font color="#FFCD00">&ensp; ${score}</font> 
