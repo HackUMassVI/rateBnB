@@ -1,0 +1,56 @@
+
+body {
+  margin-top: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 100;
+  background: #30b6db;
+  color: white;
+  width: 165px;
+  height:130px;
+  }
+.imager
+{
+    margin: auto;
+    width: 27%;
+    padding-bottom: 14px;
+}
+
+#texter
+{
+  font-size: 16px;
+}
+.container
+{
+  margin: 0 auto;
+  padding: 3px;
+  text-align: center;
+  border-collapse: collapse;
+  font-size: 22px;
+  background: #30b6db;
+  width: 100px;
+}
+
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-family: FontAwesome;
+}
+
+.stars-outer::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: grey;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "\f005 \f005 \f005 \f005 \f005";
+  color: #F5A623;
+}
