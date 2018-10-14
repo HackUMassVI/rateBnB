@@ -11,6 +11,19 @@
   			font-weight: 100;
   		}
 	</style>
+	<script>
+		chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    	var tab = tabs[0];
+		var modURL= tab.url.substr(8);
+		var finalURL= "http://67.205.146.104:5000/scoreListChrome?url="+modURL;
+		function changeLink(){
+    	setTimeout(function() {
+        var link = document.getElementById("redir");
+        link.setAttribute('href', "http://facebook.com");
+    }, 100);
+}
+		document.getElementById("redir").href="https://www.facebook.com";
+	</script>
 </head>
 <Body>
 	<div class="frame1">
@@ -22,7 +35,7 @@
 		</div>
 		<div id=texter align="center">RateBnB</div>
 			<div class="container">
-				<a href="">
+				<a href="https://www.google.com" id="redir" target="_blank" onclick="changeLink()">
 				<div class="stars-outer">
 					<div class="stars-inner">
 					</div>
@@ -30,6 +43,8 @@
 				</a>
 			</div>
 		</div>
+
+	
 
 	<script src=content.js></script>
 
