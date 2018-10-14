@@ -72,7 +72,7 @@ def get_amenities(page):
 def get_score(review_count, rating, amenities, safety):
 	# 50% crime, 20% review_count 20% rating 10% amenties
 	review_c = 100 if int(review_count)>=100 else int(review_count)
-	score = float(safety)/100.0*0.3 + (float(len(amenities))/7.0)*0.1 + (float(rating)/5.0)*0.3 + (float(review_c)/100.0)*0.3
+	score = float(safety)/100.0*0.3 + (float(len(amenities))/7.0)*0.2 + (float(rating)/5.0)*0.3 + (float(review_c)/100.0)*0.2
 	return str("{0:.2f}".format(score*100))+"%"
 
 def get_crime_index(lat,lon):
