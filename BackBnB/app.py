@@ -129,7 +129,7 @@ def get_chrome():
 	review_count = get_review_count(page)
 	amenities = get_amenities(page)
 	score = get_score(review_count, rating, amenities, crime_index)
-	return int(score[:2])
+	return score[:2]
 
 
 
