@@ -168,8 +168,16 @@ def get_android():
 	review_count = get_review_count(page)
 	amenities = get_amenities(page)
 	score = get_score(review_count, rating, amenities, crime_index)
-	output = "{'listing_name':listing_name, 'image':img_src,'rating':rating,'review_count':review_count,'safety':crime_index,'amenities':amenities,'score':score}"
-	return output
+	output = {
+				'listing_name':listing_name, 
+				'image':img_src,
+				'rating':rating,
+				'review_count':review_count,
+				'safety':crime_index,
+				'amenities':amenities,
+				'score':score
+	}
+	return ''.join('{}{}'.format(key, val) for key, val in output.items())
 
 
 if __name__ == '__main__':
