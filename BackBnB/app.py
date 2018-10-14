@@ -76,17 +76,20 @@ def get_amenities(page):
 	return available
 
 def get_score(review_count, rating, amenities, safety):
-	# 50% crime, 20% review_count 20% rating 10% amenties
+	# 30% crime, 20% review_count 30% rating 20% amenties
 	review_c = 100 if int(review_count)>=100 else int(review_count)
 	score = float(safety)/100.0*0.3 + (float(len(amenities))/7.0)*0.2 + (float(rating)/5.0)*0.3 + (float(review_c)/100.0)*0.2
 	return str("{0:.2f}".format(score*100))+"%"
 
 def get_crime_index(lat,lon):
-	url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
-	headers = {"X-Mashape-Key": "qWMc2K59dgmshJH33sKjN5KILREOp1QQXj2jsniuCdIgcwNvTi", "Accept": "application/json"}
-	response = requests.get(url, headers = headers)
-	crime_dict = json.loads(response.text)
-	return crime_dict['score']
+	try:
+		url = "https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=" + lat + "&lon=" + lon
+		headers = {"X-Mashape-Key": "qWMc2K59dgmshJH33sKjN5KILREOp1QQXj2jsniuCdIgcwNvTi", "Accept": "application/json"}
+		response = requests.get(url, headers = headers)
+		crime_dict = json.loads(response.text)
+		return crime_dict['score']
+	except:
+		return '70'
 
 @app.route('/', methods=['GET'])
 def home():
