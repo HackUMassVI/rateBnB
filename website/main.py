@@ -23,8 +23,7 @@ def home():
         d = r.json()
         data = d[0]
         return scoreList(origUrl, data['amenities'], data['image'],data['listing_name'], data['rating'], data['review_count'], data['safety'], data['score'])
-#, data['image'], data['listing_name'], data['rating'], data['review_count'], data['safety'], data['score']
-#,image,listing_name,rating,review_count,safety,score,
+
 @app.route('/scoreList', methods=['GET', 'POST'])
 def scoreList(origUrl,amenities,image,listing_name,rating,review_count,safety,score):
         return render_template('scoredListing.mako', url=origUrl, amenities=amenities,image=image,listing_name=listing_name,rating=rating,review_count=review_count,safety=safety,score=score)
