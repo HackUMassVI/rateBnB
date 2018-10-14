@@ -1,5 +1,4 @@
 #!flask/bin/python
-#examples
 
 from flask import Flask, jsonify, abort, make_response, request, url_for, jsonify
 import urllib.request as urllib2
@@ -10,7 +9,6 @@ import requests
 import json
 
 app = Flask(__name__)
-
 
 def get_page(link):
 	try:
