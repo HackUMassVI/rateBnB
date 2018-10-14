@@ -6,12 +6,29 @@ body {
   background: #30b6db;
   color: white;
   width: 165px;
-  height:130px;
+  max-height:130px;
   }
+
+.frame1
+{
+    margin: auto;
+    width: 50%;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    transform-origin:50% 50%;
+    animation:1.3s rotateRight 2 linear; 
+
+}
+
+@keyframes rotateRight{
+    100%{ transform:rotate(360deg); }
+}
+
 .imager
 {
     margin: auto;
     width: 27%;
+    padding-top: 20px;
     padding-bottom: 14px;
 }
 

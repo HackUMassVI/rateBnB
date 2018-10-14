@@ -2,7 +2,16 @@
 	chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     	var tab = tabs[0];
 	
-	
+	var bool= tab.url.includes("airbnb.com/rooms");
+	document.querySelector(".frame1").style.display="none";
+
+
+	if(bool)
+	{
+
+	document.querySelector(".frame2").style.display="none";
+	document.querySelector(".frame1").style.display="block";
+
 	const xhttp = new XMLHttpRequest();
 	var modURL= tab.url.substr(8);
 	var temp = "";
@@ -17,11 +26,11 @@
 	xhttp.onreadystatechange = function()
 	{
 	    if(xhttp.readyState == 4 && xhttp.status == 200) {
-	    var response = xhttp.responseText;
-	    var bool= tab.url.includes("airbnb.com/rooms");
+	    
+	    	document.querySelector(".frame2").style.display="block";
+			document.querySelector(".frame1").style.display="none";
+	    	var response = xhttp.responseText;
 
-	    if(bool)
-		{		
 			var rating= parseInt(response)/20;//Some formula or API sends it
 			const starTotal=5;
 			const starPercentage = (rating/starTotal)*100;
@@ -31,9 +40,6 @@
 		}
 
 	    }
-	}
 	xhttp.send(null);
-	
-	
-
+	}
 });
