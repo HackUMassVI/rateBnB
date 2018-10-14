@@ -116,6 +116,21 @@ def get_index():
 	}]
 	return jsonify(output)
 
+@app.route('/chrome_get', methods=['GET'])
+def get_score():
+	url = str(request.values['url'])
+	url = "https://"+url
+	page = get_page(url)
+	lat,lon = get_coords(page)
+	crime_index = get_crime_index(lat,lon)
+	listing_name = get_listing_name(page)
+	img_src = get_image(page)
+	rating = get_rating(page)
+	review_count = get_review_count(page)
+	amenities = get_amenities(page)
+	score = get_score(review_count, rating, amenities, crime_index)
+	return int(score[:2])
+
 
 
 

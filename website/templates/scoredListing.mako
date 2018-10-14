@@ -84,7 +84,7 @@ body {
                                   % elif int(score[:2])>40:
                                   <font color="#FFCD00">&ensp; ${score}</font> 
                                   % else:
-                                  <font color="#red">&ensp; ${score}</font> 
+                                  <font color="red">&ensp; ${score}</font> 
                                   % endif
                                 </h2>
 
