@@ -155,7 +155,21 @@ def get_ios():
 	}
 	return jsonify(output)
 
-
+@app.route('/android_get', methods=['GET'])
+def get_android():
+	url = str(request.values['url'])
+	url = "https://"+url
+	page = get_page(url)
+	lat,lon = get_coords(page)
+	crime_index = get_crime_index(lat,lon)
+	listing_name = get_listing_name(page)
+	img_src = get_image(page)
+	rating = get_rating(page)
+	review_count = get_review_count(page)
+	amenities = get_amenities(page)
+	score = get_score(review_count, rating, amenities, crime_index)
+	output = "{'listing_name':listing_name, 'image':img_src,'rating':rating,'review_count':review_count,'safety':crime_index,'amenities':amenities,'score':score}"
+	return output
 
 
 if __name__ == '__main__':
