@@ -32,7 +32,7 @@ body {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-    <title>Creative - Start Bootstrap Theme</title>
+    <title>RateBnB</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -84,7 +84,7 @@ body {
               <div class="panel panel-default">
                   <div class="panel-body">
                     <h3 class="text-center">Welcome</h3>
-                    <p class="lead text-center">Enter a URL below to begin</p>
+                    <p class="lead text-center">Enter a URL below to get a score!</p>
                       <form class="form-horizontal" id = "formTing" role="form" action="/" method="post">
                       <div class="form-group text-center" style="margin-left: 15%">
                           <div class="col-sm-9">
