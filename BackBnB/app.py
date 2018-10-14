@@ -177,7 +177,7 @@ def get_android():
 				'amenities':amenities,
 				'score':score
 	}
-	return ''.join('{}{}'.format(key, val) for key, val in output.items())
+	return json.dumps(output)
 
 
 if __name__ == '__main__':
