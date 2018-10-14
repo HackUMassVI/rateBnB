@@ -57,7 +57,10 @@ def get_rating(page):
 def get_review_count(page):
 	search_str = "reviewCount"
 	page = page.decode("utf-8")
-	index = page.index(search_str)
+	try:
+		index = page.index(search_str)
+	except:
+		return 0
 	short = page[index:]
 	first = short.index("content=")
 	l = len("content=\"")
