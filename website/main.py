@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_mako import MakoTemplates, render_template
 import requests
-
+import json
 
 app = Flask(__name__)
 mako = MakoTemplates(app)
@@ -13,15 +13,21 @@ def home():
     else:
         form = request.form
         url = form.get('URL')
-        temp = url.index("?")
+        origUrl = url
+        temp = len(url)
+        if "?" in url:
+            temp = url.index("?")
         url = url[8:temp]
-        returnedVal = "http://67.205.146.104:80/get_rating?url=" + url
+        returnedVal = "http://67.205.146.104:80/get_all_info?url=" + url
         r = requests.get(returnedVal)
-        return scoreList(r.text)
-
+        d = r.json()
+        data = d[0]
+        return scoreList(origUrl, data['amenities'], data['image'],data['listing_name'], data['rating'], data['review_count'], data['safety'], data['score'])
+#, data['image'], data['listing_name'], data['rating'], data['review_count'], data['safety'], data['score']
+#,image,listing_name,rating,review_count,safety,score,
 @app.route('/scoreList', methods=['GET', 'POST'])
-def scoreList(returnedVal):
-        return render_template('scoredListing.mako', response=returnedVal)
+def scoreList(origUrl,amenities,image,listing_name,rating,review_count,safety,score):
+        return render_template('scoredListing.mako', url=origUrl, amenities=amenities,image=image,listing_name=listing_name,rating=rating,review_count=review_count,safety=safety,score=score)
 
 @app.route('/about')
 def about():
